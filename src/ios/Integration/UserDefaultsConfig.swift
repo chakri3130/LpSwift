@@ -1,11 +1,3 @@
-//
-//  UserDefaultsConfig.swift
-//  Bella Bank
-//
-//  Created by Luigi Villa on 25/03/2020.
-//  Copyright © 2020 Vegan Solutions. All rights reserved.
-//
-
 import Foundation
 
 struct UserDefaultsConfig {
