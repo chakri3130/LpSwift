@@ -11,5 +11,38 @@
          </feature>
       </config-file>
       <source-file src="src/ios/livepersonswift.swift" />
+      <source-file src="src/ios/Integration/BellaLPMessaging.swift" />
+      <source-file src="src/ios/Integration/LPMessagingWrapper.swift" />
+      <source-file src="src/ios/Integration/ThemeManager.swift" />
+      <source-file src="src/ios/Integration/UserDefaultsConfig.swift" />
+      <source-file src="src/ios/Integration/UserDefaultsWrapper.swift" />
+      <resource-file src="src/ios/Font/OFL.txt" />
+      <resource-file src="src/ios/Font/Rubik-Black.ttf" />
+      <resource-file src="src/ios/Font/Rubik-BlackItalic.ttf" />
+      <resource-file src="src/ios/Font/Rubik-Bold.ttf" />
+      <resource-file src="src/ios/Font/Rubik-BoldItalic.ttf" />
+      <resource-file src="src/ios/Font/Rubik-Italic.ttf" />
+      <resource-file src="src/ios/Font/Rubik-Light.ttf" />
+      <resource-file src="src/ios/Font/Rubik-LightItalic.ttf" />
+      <resource-file src="src/ios/Font/Rubik-Medium.ttf" />
+      <resource-file src="src/ios/Font/Rubik-MediumItalic.ttf" />
+      <resource-file src="src/ios/Font/Rubik-Regular.ttf" />
+      <resource-file src="src/ios/LPMessagingSDK/LPMessagingSDK-dSYMs/09380BE9-B33C-3659-BDBA-948175E70798.bcsymbolmap"/> 
+      <resource-file src="src/ios/LPMessagingSDK/LPMessagingSDKModels.bundle" />
+      <source-file src="src/ios/LPMessagingSDK/LPMessagingSDK.xcframework" target-dir="lib" framework="true" />
+      <resource-file src="src/ios/ImageAssets/LPConversation/bgChat.imageset/bgChat@2x.png" />
+      <resource-file src="src/ios/ImageAssets/LPConversation/bgChat.imageset/bgChat@3x.png"  />
+      <resource-file src="src/ios/ImageAssets/LPConversation/chatAvatar.imageset/chatAvatar.pdf"  />
+      <resource-file src="src/ios/ImageAssets/LPConversation/lpcClose.imageset/lpcClose.pdf"  />
+      <resource-file src="src/ios/ImageAssets/LPConversation/lpcMenuDots.imageset/lpcMenuDots.png"  />
+      <resource-file src="src/ios/ImageAssets/LPConversation/lpcMenuDots.imageset/lpcMenuDots@2x.png"  />
+      <resource-file src="src/ios/ImageAssets/LPConversation/lpcMenuDots.imageset/lpcMenuDots@3x.png"  />
+      <resource-file src="src/ios/ImageAssets/aIc24Send.imageset/aIc24Send.png" />
+      <resource-file src="src/ios/ImageAssets/aIc24Send.imageset/aIc24Send@2x.png" />
+      <resource-file src="src/ios/ImageAssets/aIc24Send.imageset/aIc24Send@3x.png" />
+      <resource-file src="src/ios/ImageAssets/aIc24Gallery.imageset/aIc24Gallery.pdf" />
+      <resource-file src="src/ios/ImageAssets/chatAvatar.png" />
+      <resource-file src="src/ios/ImageAssets/lpClose.png" />
+      <framework custom="true" embed="true" src="src/ios/LPMessagingSDK/LPMessagingSDK.xcframework" />
    </platform>
 </plugin>
