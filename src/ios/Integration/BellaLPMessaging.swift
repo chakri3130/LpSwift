@@ -1,13 +1,9 @@
-//
-//  LPMessaging.swift
-//  Bella Bank
-//
-//  Created by Mauro Olivo on 09/06/2020.
-//  Copyright © 2020 Vegan Solutions. All rights reserved.
-//
-
 import Foundation
 import LPMessagingSDK
+
+protocol BellaLPSDKDelegate: class {
+    func chatDismissed()
+}
 
 enum LPEntryPoint {
     case iOSDefault
@@ -90,37 +86,37 @@ enum LPEntryPoint {
 
 class BellaLPMessaging {
     
-	static var shared: BellaLPMessaging!// = BellaLPMessaging()
-	
-	static let accountID: String = "70387001"
-	static let issuerID: String = "QMC_iOS" //"Bella Loves Me"
-	static let appInstallationId: String = "81be1920-b6cb-450d-87eb-d21b9c90e62f"
-	static var isShowing: Bool = false
-	
-	private var lastEngagementResponse: LPGetEngagementResponse?
-	private var engagementRefreshTimer: Timer?
-	private var isRefreshingEngagements: Bool = false
-	private var onEngagementRecieved: ((_ :LPGetEngagementResponse?)->())? = nil
-	
-    private var lastCustomerId: String?
+    static var shared: BellaLPMessaging!// = BellaLPMessaging()
     
-	init() {
-		let monitoringInitParams = LPMonitoringInitParams(appInstallID: BellaLPMessaging.appInstallationId)
-		do {
-			try LPMessaging.instance.initialize(BellaLPMessaging.accountID, monitoringInitParams: monitoringInitParams)
-		} catch {
-			debugPrint("Was unable to initialize LPMessagingSDK for account \(BellaLPMessaging.accountID)")
-			return
-		}
-        
+    static let accountID: String = "70387001"
+    static let issuerID: String = "QMC_iOS" //"Bella Loves Me"
+    static let appInstallationId: String = "81be1920-b6cb-450d-87eb-d21b9c90e62f"
+    static var isShowing: Bool = false
+    private var engagementRefreshTimer: Timer?
+    private var isRefreshingEngagements: Bool = false
+    private var onEngagementRecieved: ((_ :LPGetEngagementResponse?)->())? = nil
+    
+    private var lastCustomerId: String?
+    weak var delegate: BellaLPSDKDelegate?
+
+    init() {
+        let monitoringInitParams = LPMonitoringInitParams(appInstallID: BellaLPMessaging.appInstallationId)
+        do {
+            try LPMessaging.instance.initialize(BellaLPMessaging.accountID, monitoringInitParams: monitoringInitParams)
+        } catch {
+            debugPrint("Was unable to initialize LPMessagingSDK for account \(BellaLPMessaging.accountID)")
+            return
+        }
+
         configureConversation()
-	}
-	
-	static func initialize() {
-		shared = BellaLPMessaging()
-	}
-	
-	static func logout(success: (() -> Void)? = nil,
+    }
+    
+    static func initialize() {
+//        shared = BellaLPMessaging()
+        shared = shared ?? BellaLPMessaging()
+    }
+    
+    static func logout(success: (() -> Void)? = nil,
                 failure: ((_ errors: [Error]) -> Void)? = nil) {
                      
         LPMessaging.instance.logout {
@@ -129,57 +125,29 @@ class BellaLPMessaging {
             failure?(error)
         }
     }
-		
-	func destroyInstance(completion: (() -> Void)? = nil) {
+        
+    func destroyInstance(completion: (() -> Void)? = nil) {
 
         debugPrint("Destroy LPMessaging local data")
         LPMessaging.instance.logout(completion: {
             LPMessaging.instance.destruct()
-			self.lastEngagementResponse = nil
-
-//            let monitoringInitParams = LPMonitoringInitParams(appInstallID: BellaLPMessaging.appInstallationId)
-//
-//			do {
-//				try LPMessaging.instance.initialize(BellaLPMessaging.accountID, monitoringInitParams: monitoringInitParams)
-//			} catch {
-//				Logger.err("Was unable to initialize LPMessagingSDK for account \(BellaLPMessaging.accountID)")
-//				completion?()
-//				return
-//			}
-
-			completion?()
-		}) { (error) in
-			completion?()
+            completion?()
+        }) { (error) in
+            completion?()
             debugPrint("Failed logging out form LPMessagingSDK")
-		}
-		
+        }
     }
     
     func destruct() {
         LPMessaging.instance.destruct()
         BellaLPMessaging.initialize()
     }
-    
-//    func showChat(entryPoint: LPEntryPoint, customDelegate: LPMessagingSDKdelegate? = nil, in controller: UIViewController? = nil) {
-////        let tempCustomerId: String? = nil
-////        LPMessaging.instance.setUserProfile(LPUser(firstName: "Saurabh", lastName: "Prajapati", nickName: "SP", uid: tempCustomerId, profileImageURL: nil, phoneNumber: nil, employeeID: nil), brandID: BellaLPMessaging.accountID)
-//        
-//        guard lastEntryPoint == entryPoint && lastEngagementResponse != nil else {
-//            getEngagement(for: entryPoint) {[weak self] (response) in
-//                if response != nil {
-//                    self?.showChat(entryPoint: entryPoint, customDelegate: customDelegate, in: controller)
-//                }
-//            }
-//            return
-//        }
-//        
-//        showChat(engagementResponse: lastEngagementResponse, entryPoint: entryPoint, customDelegate: customDelegate, in: controller)
-////        destruct()
-//        
-//
-//    }
-    
-    func showChat(engagementResponse: LPGetEngagementResponse?, entryPoint: LPEntryPoint, customDelegate: LPMessagingSDKdelegate? = nil, in controller: UIViewController? = nil) {
+
+    func showChat(engagementResponse: LPGetEngagementResponse?,
+                  entryPoint: LPEntryPoint,
+                  customDelegate: LPMessagingSDKdelegate? = nil,
+                  in controller: UIViewController? = nil,
+                  completion: ((Bool) -> Void)?) {
         LPMessaging.instance.delegate = customDelegate ?? self
 
         var conversationQuery = LPMessaging.instance.getConversationBrandQuery(BellaLPMessaging.accountID)
@@ -193,12 +161,12 @@ class BellaLPMessaging {
         
         let welcomeMessageParam = LPWelcomeMessage(message: entryPoint.welcomeMessage, frequency: .FirstTimeConversation)
 //        welcomeMessageParam.set(NumberOfOptionsPerRow: 2)
-        
         do {
             try welcomeMessageParam.set(options: entryPoint.quickReplies.map({ LPMessagingSDK.LPWelcomeMessageOption(value: $0, displayName: $0) }))
             
         } catch let error {
             print("error \(error)")
+            completion?(false)
         }
         
         let conversationViewParams =
@@ -207,12 +175,10 @@ class BellaLPMessaging {
                                      isViewOnly: false,
                                      conversationHistoryControlParam: historyControlParam,
                                      welcomeMessage: welcomeMessageParam)
-        
-//        BellaLPMessaging.configureConversation()
-//        configureConversation()
 
         DispatchQueue.main.async {
             LPMessaging.instance.showConversation(conversationViewParams, authenticationParams: nil)
+            completion?(true)
         }
 
         BellaLPMessaging.isShowing = true
@@ -222,25 +188,25 @@ class BellaLPMessaging {
         
         let avatar = UIImage(named: "chatAvatar")
         let configurations = LPConfig.defaultConfiguration
-        
+        configurations.linkPreviewBorderColor = .clear
         configurations.conversationBackgroundColor = .clear
         configurations.conversationBackgroundPortraitImage = UIImage(named: "bgChat")
         
         //Navigation
         // Setting black with alpha 0.4 is not working
         configurations.conversationNavigationBackgroundColor = UIColor(red: 107.0/255.0, green: 120.0/255.0, blue: 120.0/255.0, alpha: 1.0) // ThemeManager.shared.color(color: .lpcBgNavigation) ?? .gray
-		//configurations.conversationBackgroundColor = .clear
+        //configurations.conversationBackgroundColor = .clear
         configurations.conversationNavigationTitleColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
         configurations.systemBubbleTextColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
-		configurations.lpNavigationBarLeftItemImageButton = UIImage(named: "lpcClose")
-		configurations.lpNavigationBarRightItemImageButton = UIImage(named: "lpcMenuDots")
+        configurations.lpNavigationBarLeftItemImageButton = UIImage(named: "lpClose")
+        configurations.lpNavigationBarRightItemImageButton = UIImage(named: "lpcMenuDots")
 
         //InputTextView
         configurations.inputTextViewContainerBackgroundColor = UIColor(red: 5/255.0, green: 10/255.0, blue: 41/255.0, alpha: 0.0)
-		configurations.inputTextViewTopBorderColor = .clear
+        configurations.inputTextViewTopBorderColor = .clear
         configurations.sendButtonDisabledColor = UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0)
         configurations.sendButtonEnabledColor =  UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0)
-		configurations.sendButtonImage = UIImage(named: "aIc24Send")
+        configurations.sendButtonImage = UIImage(named: "aIc24Send")
         configurations.isSendMessageButtonInTextMode = false
         
         // ConnectionStatus Configuration
@@ -317,12 +283,12 @@ class BellaLPMessaging {
         configurations.photosharingMenuButtonsBackgroundColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
 
         //configurations.photoSharingMenuCameraImage
-		configurations.cameraButtonEnabledColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
+        configurations.cameraButtonEnabledColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
         configurations.cameraButtonDisabledColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
         
-		configurations.photoSharingCloseMenuImageButton = UIImage(named: "lpcClose")
-		configurations.photoSharingMenuLibraryImage = UIImage(named: "aIc24Gallery")
-		
+        configurations.photoSharingCloseMenuImageButton = UIImage(named: "lpcClose")
+        configurations.photoSharingMenuLibraryImage = UIImage(named: "aIc24Gallery")
+        
         //enable voice messages
         configurations.enableAudioSharing = true
         configurations.recordingDurationLimit = 60
@@ -333,16 +299,16 @@ class BellaLPMessaging {
         //configurations.fileCellLoaderRingProgressColor
         //configurations.fileCellLoaderRingBackgroundColor
         //configurations.maxNumberOfSavedFilesOnDisk
-		
+        
         // Read Text Type
         configurations.isReadReceiptTextMode = false//true
         configurations.checkmarkReadColor = .clear
         
         // Font Configuration
         configurations.customFontNameConversationFeed = "Rubik-Regular"
-		configurations.customFontNameNonConversationFeed = "Rubik-Regular"
+        configurations.customFontNameNonConversationFeed = "Rubik-Regular"
         configurations.customFontNameDateSeparator = "Rubik-Regular"
-		
+        
         configurations.toastNotificationsEnabled = false
         
         // Unread Message
@@ -365,7 +331,7 @@ class BellaLPMessaging {
         configurations.csatNavigationBackgroundColor = .clear
 
         // LinkPreview
-        configurations.enableLinkPreview = true
+        configurations.enableLinkPreview = false;
 //        configurations.linkPreviewBorderColor = ThemeManager.shared.color(color: .textColor) ?? .white
 //        configurations.linkPreviewBackgroundColor = ThemeManager.shared.color(color: .textColor) ?? .white
 //        configurations.linkPreviewTitleTextColor = ThemeManager.shared.color(color: .lpcBubbleTextColor) ?? .white
@@ -374,7 +340,7 @@ class BellaLPMessaging {
         
         // RealTimeLinkPreview
         // Disable realTimeLinkPreview to achieve clear backgroundColor of the InputTextView
-        configurations.enableRealTimeLinkPreview = true
+        configurations.enableRealTimeLinkPreview = false;
 //        configurations.urlRealTimePreviewBackgroundColor = ThemeManager.shared.color(color: .textColor) ?? .white
 //        configurations.urlRealTimePreviewBorderColor = ThemeManager.shared.color(color: .textColor) ?? .white
 //        configurations.urlRealTimePreviewTitleTextColor = ThemeManager.shared.color(color: .lpcBubbleTextColor) ?? .white
@@ -394,42 +360,30 @@ class BellaLPMessaging {
         configurations.loadingViewTextColor =   UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0)
         
         //to show banner like agent will respond soon
-		configurations.ttrShouldShow = false
+        configurations.ttrShouldShow = false
         configurations.ttrShowShiftBanner = false
         configurations.showOffHoursBanner = false
         configurations.ttrShouldShowTimestamp = false
         configurations.ttrBannerBackgroundColor = .clear
-		configurations.ttrBannerTextColor =   UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0)
-		
+        configurations.ttrBannerTextColor =   UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0)
+        
         // scroll to bottom
-		configurations.scrollToBottomButtonEnabled = true
+        configurations.scrollToBottomButtonEnabled = true
         configurations.scrollToBottomButtonMessagePreviewEnabled = false
         configurations.scrollToBottomButtonBadgeBackgroundColor =   UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0) // ThemeManager.shared.color(color: .lpcBgUserBubble) ?? .red
         configurations.scrollToBottomButtonBackgroundColor =   UIColor(red: 52/255.0, green: 60/255.0, blue: 113/255.0, alpha: 1.0)
         configurations.scrollToBottomButtonArrowColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
         configurations.scrollToBottomButtonBadgeTextColor =  UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     }
-	
-    private var lastEntryPoint: LPEntryPoint?
     
-    func getEngagement(for entryPoint: LPEntryPoint, onEnd: ((_ :LPGetEngagementResponse?)->())?) {
-        if entryPoint == lastEntryPoint && lastEngagementResponse != nil {
-            onEnd?(lastEngagementResponse)
-            return
-        }
+
+    func getEngagement(for entryPoints: [String], onEnd: ((_ :LPGetEngagementResponse?)->())?) {
         
         let identity = LPMonitoringIdentity(consumerID: nil, issuer: BellaLPMessaging.issuerID)
-        var entryPoints = entryPoint.entryPoints
-        
-//        if let envEntryPoint = Environment.entryPoint, !envEntryPoint.isEmpty {
-//            entryPoints.append(envEntryPoint)
-//        }
-        
+
         let monitoringParams: LPMonitoringParams? = LPMonitoringParams (entryPoints: entryPoints, engagementAttributes: nil)
 
         LPMessaging.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams) { (getEngagementResponse) in
-            self.lastEngagementResponse = getEngagementResponse
-            self.lastEntryPoint = entryPoint
             onEnd?(getEngagementResponse)
         } failure: { (error) in
             onEnd?(nil)
@@ -437,24 +391,26 @@ class BellaLPMessaging {
     }
 
     static func onChatDidDismiss(resolveConversation: Bool = false) {
-		
-		BellaLPMessaging.isShowing = false
 
-		if resolveConversation {
-			let conversationQuery = LPMessaging.instance.getConversationBrandQuery(BellaLPMessaging.accountID)
+        BellaLPMessaging.isShowing = false
+
+        if resolveConversation {
+            let conversationQuery = LPMessaging.instance.getConversationBrandQuery(BellaLPMessaging.accountID)
             LPMessaging.instance.resolveConversation(conversationQuery)
-		}
-		
+        }
+        
         LPMessaging.instance.delegate = nil
-		
-//		MainCoordinator.shared?.rootViewController.resetBadgeView()
-		UIApplication.shared.applicationIconBadgeNumber = 0
-	}
+        
+//        MainCoordinator.shared?.rootViewController.resetBadgeView()
+        UIApplication.shared.applicationIconBadgeNumber = 0
+
+    }
 }
 
 extension BellaLPMessaging: LPMessagingSDKdelegate {
     func LPMessagingSDKConversationViewControllerDidDismiss() {
-		BellaLPMessaging.onChatDidDismiss()
+        BellaLPMessaging.onChatDidDismiss()
+        delegate?.chatDismissed()
     }
     
     // This protocol method are not optional so we need to implement them even if empty
