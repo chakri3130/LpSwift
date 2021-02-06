@@ -27,17 +27,14 @@ import UIKit
 import LPMessagingSDK
 
 public class LPMessagingWrapper: NSObject {
-
+    
+    var engagement:LPGetEngagementResponse?
     @objc public convenience init(user: LPUser?, authenticationParams: LPAuthenticationParams?) {
         self.init()
         if BellaLPMessaging.shared == nil {
             BellaLPMessaging.initialize()
         }
         self.setupLPSDKParams(user: user, authParams: authenticationParams)
-    }
-
-    @objc public func showChat() {
-        BellaLPMessaging.shared.showChat(engagementResponse: nil, entryPoint: .iOSDefault)
     }
 
     private func setupLPSDKParams(user: LPUser?, authParams: LPAuthenticationParams?) {
@@ -50,7 +47,40 @@ public class LPMessagingWrapper: NSObject {
                                                          brandID: BellaLPMessaging.accountID)
         }
     }
-
     
+    deinit {
+        let conversationQuery = LPMessaging.instance.getConversationBrandQuery(BellaLPMessaging.accountID)
+        LPMessaging.instance.resolveConversation(conversationQuery)
+        self.engagement = nil
+    }
+
+    @objc public func getEngagement(entryPoints: [String],
+                                    completion: ((Bool) -> Void)?) {
+
+        BellaLPMessaging.shared.getEngagement(for: entryPoints) { [weak self](response) in
+            
+            self?.engagement = response
+            completion?(response != nil)
+        }
+    }
+
+    @objc public func showChat(completion: ((Bool) -> Void)?) {
+        BellaLPMessaging.shared.showChat(engagementResponse: self.engagement,
+                                         entryPoint: .iOSDefault,
+                                         completion: completion)
+    }
+
+    @objc public func logOut(completion: ((Bool) -> Void)?) {
+
+    }
+
+    @objc public func clearHistory(completion: ((Bool) -> Void)?) {
+
+    }
+
+
+
+
+
 }
 
