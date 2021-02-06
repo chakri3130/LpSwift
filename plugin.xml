@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova.plugin.livePersonSwift" version="0.0.1">
+   <name>livePersonSwift</name>
+   <js-module name="livePersonSwift" src="www/livePersonSwift.js">
+      <clobbers target="cordova.plugins.livePersonSwift" />
+   </js-module>
+   <platform name="ios">
+      <config-file parent="/*" target="config.xml">
+         <feature name="livePersonSwift">
+            <param name="ios-package" value="livePersonSwift" />
+         </feature>
+      </config-file>
+      <source-file src="src/ios/livePersonSwift.swift" />
+   </platform>
+</plugin>

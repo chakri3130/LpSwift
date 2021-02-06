@@ -1,0 +1,21 @@
+{
+  "name": "cordova.plugin.livepersonswift",
+  "version": "0.0.1",
+  "description": "We are creating a plugin using swift based ",
+  "cordova": {
+    "id": "cordova.plugin.livePersonSwift",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "author": "MedleyMed",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
