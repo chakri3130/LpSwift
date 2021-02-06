@@ -10,7 +10,7 @@
             <param name="ios-package" value="livepersonswift" />
          </feature>
       </config-file>
-      <source-file src="src/ios/livepersonswift.swift" />
+      <source-file src="src/ios/Integration/livepersonswift.swift" />
       <source-file src="src/ios/Integration/BellaLPMessaging.swift" />
       <source-file src="src/ios/Integration/LPMessagingWrapper.swift" />
       <source-file src="src/ios/Integration/ThemeManager.swift" />
