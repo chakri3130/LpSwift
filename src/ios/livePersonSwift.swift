@@ -1,4 +1,4 @@
-@objc(livePersonSwift) class livePersonSwift : CDVPlugin{
+@objc(livepersonswift) class livepersonswift : CDVPlugin{
 
 var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
 @objc(add:) func add(_ command: CDVInvokedUrlCommand) {

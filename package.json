@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "We are creating a plugin using swift based ",
   "cordova": {
-    "id": "cordova.plugin.livePersonSwift",
+    "id": "cordova.plugin.livepersonswift",
     "platforms": [
       "ios"
     ]
