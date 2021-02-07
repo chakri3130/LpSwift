@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="enable_structured_content">false</bool>
+    <color name="structured_content_border_color">@color/colorPrimary</color>
+    <dimen name="structured_content_border_width">1dp</dimen>
+    <color name="scroll_down_indicator_background_color">@color/darkGreyBlue</color>
+    <dimen name="regular_text_size">@dimen/dimen_15sp</dimen>
+
+    <!-- Connection status bar -->
+    <color name="connection_status_connecting_bg_color">@color/colorPrimary</color>
+    <color name="connection_status_not_connected_bg_color">@color/colorPrimary</color>
+    <color name="connection_status_connecting_text_color">#FFF</color>
+    <color name="connection_status_not_connected_text_color">#FFF</color>
+<!--    <color name="conversation_background">#ea5c8d</color>-->
+    <drawable name="conversation_background">@drawable/ic_bg</drawable>
+    <bool name="enable_conversation_resolved_separator">false</bool>
+    <bool name="enable_conversation_resolved_message">false</bool>
+    <color name="conversation_separator_text_color">@color/primaryTextColor</color>
+    <dimen name="sticky_timestamp_text_size">@dimen/dimen_16sp</dimen>
+    <dimen name="sticky_timestamp_margin_top">@dimen/dimen_15dp</dimen>
+
+    <!-- Vibrate -->
+    <bool name="vibrate_enabled">true</bool>
+
+    <integer name="ttr_duration">3000</integer>
+    <integer name="ttrFirstTimeDelaySeconds">10</integer>
+    <color name="lp_textColorSecondary">@color/primaryTextColor</color>
+
+    <!--Feedback Fragment-->
+    <bool name="show_feedback">false</bool>
+    <color name="lp_header_background_color">@android:color/white</color>
+    <color name="lp_progress_bar_color">@color/dialogGradientEndColor</color>
+    <color name="lp_header_text_color">@color/primaryTextColor</color>
+
+    <!--Clear History-->
+    <bool name="clear_history_show_confirm_dialog">true</bool>
+
+    <!--Links-->
+    <string name="lp_bubble_phone_links_regex" translatable="false" />
+    <string name="lp_bubble_url_links_regex" translatable="false" />
+    <string name="lp_bubble_email_links_regex" translatable="false" />
+
+    <!-- Link Preview-->
+    <bool name="link_preview_enable_real_time_preview">true</bool>
+    <bool name="link_preview_use_big_picture">false</bool>
+    <bool name="link_preview_enable_feature">true</bool>
+    <bool name="link_preview_to_use_more_than_og_tags">true</bool>
+    <bool name="unread_indicator_bubble_enable">true</bool>
+    <bool name="scroll_down_indicator_enabled">true</bool>
+    <bool name="scroll_down_indicator_unread_summary_enabled">true</bool>
+    <color name="scroll_down_indicator_unread_counter_text_color">@color/white</color>
+    <color name="scroll_down_indicator_arrow_down_color">@color/white</color>
+    <color name="scroll_down_indicator_unread_summary_text_color">@color/white</color>
+    <bool name="show_timestamp_in_ttr_notification">false</bool>
+
+    <!--TTR-->
+    <bool name="contextual_menu_on_toolbar">false</bool>
+    <integer name="encryptionVersion">1</integer>
+
+    <!-- agent PCI bubble-->
+    <color name="agent_bubble_pci_form_invitation_background_color">@color/colorPrimary</color>
+    <color name="agent_bubble_pci_form_invitation_background_btn_color">@color/colorPrimary</color>
+    <color name="agent_bubble_pci_form_invitation_stroke_color">@color/colorPrimary</color>
+    <color name="agent_bubble_pci_form_invitation_button_text_color">@color/colorPrimary</color>
+    <color name="agent_bubble_pci_form_invitation_description_text_color">@color/colorPrimary
+    </color>
+    <color name="agent_bubble_pci_form_invitation_title_text_color">@color/switchOnColor</color>
+    <color name="agent_bubble_pci_form_invitation_icon_tint_color">@color/switchOnColor</color>
+    <color name="lp_colorOnSurface">@color/primaryTextColor</color>
+    <drawable name="lp_messaging_ui_ic_agent_avatar">@drawable/ic_chat_heart_cutout</drawable>
+    <string name="lp_scroll_show_conversation" translatable="false">Bottom</string>
+    <string name="lp_scroll_when_push_notification" translatable="false">Bottom</string>
+    <string name="lp_scroll_when_foreground" translatable="false">Bottom</string>
+
+    <!--AUDIO-->
+    <bool name="enable_voice_sharing">false</bool>
+    <!--FOTO-->
+    <bool name="enable_photo_sharing">false</bool>
+    <!--FILE-->
+    <bool name="enable_file_sharing">true</bool>
+    <!--SHARE-->
+    <color name="attachment_menu_item_background_color">@color/switchOnColor</color>
+
+    <color name="lp_attachment_menu_background_color">@color/colorPrimary</color>
+
+    <color name="lp_attachment_menu_item_text_color">@color/primaryTextColor</color>
+
+    <color name="lp_attachment_menu_item_icon_color">@color/primaryTextColor</color>
+
+    <color name="captionPreview_toolbar_background">@color/colorPrimary</color>
+
+    <color name="captionPreview_toolbar_textColor">@color/primaryTextColor</color>
+    <color name="lp_file_attach_icon_clip_color">@color/attach_icon_color</color>
+    <color name="lp_file_close_icon_clip_color">@color/primaryTextColor</color>
+
+
+    <color name="consumer_bubble_voice_progressBar_tint">@color/primaryTextColor</color>
+
+    <color name="lp_voice_record_button_color">@color/primaryTextColor</color>
+
+    <color name="lp_voice_stop_button_color">@color/primaryTextColor</color>
+
+    <color name="lp_voice_replay_button_color">@color/primaryTextColor</color>
+
+    <color name="lp_voice_trash_button_color">@color/primaryTextColor</color>
+
+    <!--PCI-->
+    <bool name="pci_form_hide_logo">false</bool>
+
+    <color name="system_bubble_text_color">@color/switchOnColor</color>
+    <!-- Brand/Agent name header properties-->
+    <color name="lp_brand_header_text_color">@color/colorPrimary</color>
+
+    <!-- brand bubble-->
+    <dimen name="brand_bubble_stroke_width">0dp</dimen>
+    <color name="brand_bubble_stroke_color">@color/switchOnColor</color>
+    <color name="brand_bubble_message_text_color">@color/darkGreyBlue</color>
+    <color name="brand_bubble_message_link_text_color">#FFF</color>
+    <color name="brand_bubble_timestamp_text_color">#343c71</color>
+    <color name="brand_bubble_background_color">#f9f9f9</color>
+    <color name="brand_logo_background_color">#00000000</color>
+    <drawable name="lp_messaging_ui_brand_logo">@drawable/ic_chat_heart_cutout</drawable>
+    <dimen name="brand_bubble_padding_right">@dimen/dimen_16dp</dimen>
+    <dimen name="brand_bubble_padding_left">@dimen/dimen_16dp</dimen>
+    <dimen name="brand_bubble_padding_top">@dimen/dimen_10dp</dimen>
+    <dimen name="brand_bubble_padding_bottom">@dimen/dimen_10dp</dimen>
+
+    <!-- agent bubble-->
+    <dimen name="agent_bubble_stroke_width">0dp</dimen>
+    <color name="agent_bubble_stroke_color">@color/dialogGradientEndColor</color>
+    <color name="agent_bubble_message_text_color">@color/darkGreyBlue</color>
+    <color name="agent_bubble_message_link_text_color">#FFF</color>
+    <color name="agent_bubble_timestamp_text_color">#343c71</color>
+    <color name="agent_bubble_background_color">#f9f9f9</color>
+    <color name="agent_avatar_background_color">#00000000</color>
+    <color name="agent_bubble_link_preview_background_color">#FFF</color>
+    <color name="agent_bubble_link_preview_title_text_color">@android:color/darker_gray</color>
+    <color name="agent_bubble_link_preview_description_text_color">@android:color/darker_gray
+    </color>
+    <!--<color name="agent_avatar_icon_color">@color/colorPrimary</color>-->
+    <bool name="show_agent_typing_in_message_bubble">true</bool>
+    <dimen name="avatar_margin_trailing">@dimen/dimen_10dp</dimen>
+
+    <!--consumer bubble-->
+    <dimen name="consumer_bubble_stroke_width">0dp</dimen>
+    <color name="consumer_bubble_stroke_color">@android:color/transparent</color>
+    <color name="consumer_bubble_message_text_color">@android:color/white</color>
+    <color name="consumer_bubble_message_link_text_color">#FFF</color>
+    <color name="consumer_bubble_timestamp_text_color">#343c71</color>
+    <color name="consumer_bubble_background_color">@color/lighterPurple</color>
+    <color name="consumer_bubble_state_text_color">#343c71</color>
+    <color name="consumer_bubble_link_preview_background_color">#FFF</color>
+    <color name="consumer_bubble_link_preview_title_text_color">@android:color/darker_gray</color>
+    <color name="consumer_bubble_link_preview_description_text_color">@android:color/darker_gray
+    </color>
+
+    <!--Right side message-->
+    <dimen name="end_bubble_bottom_left_radius">5dp</dimen>
+    <dimen name="end_bubble_top_left_radius">5dp</dimen>
+    <dimen name="end_bubble_top_right_radius">5dp</dimen>
+    <dimen name="end_bubble_bottom_right_radius">0dp</dimen>
+
+    <!--Left side message-->
+    <dimen name="start_bubble_bottom_left_radius">0dp</dimen>
+    <dimen name="start_bubble_top_left_radius">5dp</dimen>
+    <dimen name="start_bubble_top_right_radius">5dp</dimen>
+    <dimen name="start_bubble_bottom_right_radius">5dp</dimen>
+
+    <color name="lp_enter_msg_text">@color/darkGreyBlue</color>
+    <color name="lp_enter_msg_hint">@color/darkGreyBlue60</color>
+    <color name="lp_send_button_text_enable">@color/send_icon_color</color>
+    <color name="lp_send_button_text_disable">@color/primaryTextColor90</color>
+
+    <color name="enter_message_background_color">#ffffff</color>
+
+    <!--Background-->
+    <color name="lp_colorBackground">#ffffff</color>
+
+    <!--Input top separator color-->
+    <color name="enter_message_top_separator_color">@android:color/darker_gray</color>
+
+    <!--Allow to display send image instead of send text-->
+    <bool name="use_send_image_button">true</bool>
+
+    <!--set padding to all four sides-->
+    <dimen name="chat_bubble_padding_right">@dimen/dimen_16dp</dimen>
+    <dimen name="chat_bubble_padding_left">@dimen/dimen_16dp</dimen>
+    <dimen name="chat_bubble_padding_top">@dimen/dimen_10dp</dimen>
+    <dimen name="chat_bubble_padding_bottom">@dimen/dimen_10dp</dimen>
+    <dimen name="dimen_15sp">15sp</dimen>
+
+    <!--Message send status-->
+    <integer name="message_receive_icons">3</integer>
+
+    <!--Font-->
+    <string name="custom_font_name_non_conversation_feed">rubik_regular.ttf</string>
+
+    <!--Actionbar color todo: choose a color if needed -->
+<!--    <color name="lp_colorPrimary">#66000000</color>-->
+
+    <!--toolbar color-->
+    <color name="conversation_toolbar_color">#40000000</color>
+
+    <!--attach icon color-->
+    <color name="attach_icon_color">#13132d</color>
+
+    <!--send icon color-->
+    <color name="send_icon_color">#13132d</color>
+
+    <!--message send status icon colors-->
+    <color name="consumer_bubble_sent_status_color">@android:color/transparent</color>
+    <color name="consumer_bubble_received_status_color">@android:color/transparent</color>
+    <color name="consumer_bubble_read_status_color">@android:color/transparent</color>
+
+    <!--Message timestamp numeric only-->
+    <bool name="message_status_numeric_timestamp_only">true</bool>
+
+    <!--Message timestamp format-->
+    <string name="lp_time_format" translatable="false">HH:mm a</string>
+
+    <!--Quick reply-->
+    <dimen name="lpui_quick_reply_button_border_width">2dp</dimen>
+    <dimen name="quick_reply_button_radius">4dp</dimen>
+    <color name="quick_reply_button_stroke_color">@android:color/white</color>
+    <color name="quick_reply_button_background_color">@color/white_alpha_20</color>
+    <color name="quick_reply_button_text_color">#343c71</color>
+</resources>
