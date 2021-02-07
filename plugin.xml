@@ -46,6 +46,7 @@
         <resource-file src="src/ios/ImageAssets/chatAvatar.png" />
         <resource-file src="src/ios/ImageAssets/lpClose.png" />
         <framework custom="true" embed="true" src="src/ios/LPMessagingSDK/LPMessagingSDK.xcframework" />
+        
     </platform>
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
@@ -57,6 +58,7 @@
         <source-file src="src/android/livepersonswift.java" target-dir="src/cordova/plugin/livepersonswift" />
         <source-file src="src/android/LpMessagingWrapper.java" target-dir="src/cordova/plugin/livepersonswift" />
       <framework src="com.liveperson.android:lp_messaging_sdk:5.5.0" />
+      <framework src="com.google.firebase.messaging.RemoteMessage" /> 
       <resource-file src="src/android/res/drawable/ic_action_name.xml" target="res/drawable/ic_action_name.xml" />
       <resource-file src="src/android/res/drawable/ic_bg.png" target="res/drawable/ic_bg.png" />
       <resource-file src="src/android/res/drawable/ic_chat_heart_cutout.xml" target="res/drawable/ic_chat_heart_cutout.xml" />
