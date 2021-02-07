@@ -41,7 +41,7 @@ public class livepersonswift extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("add")) {
-             firstName = args.getString(0);
+             firstName = "amar";
             // BRAND_ID = args.getString(1); //TODO question: is it possible that we change the BRAND_ID? Can we hardcode it or no.
             // APP_INSTALLATION_ID = args.getString(2); //TODO save question as BRAND_ID
             // APP_ID = args.getString(3);//TODO save question as BRAND_ID
