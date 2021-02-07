@@ -46,7 +46,7 @@ public class livepersonswift extends CordovaPlugin {
             // APP_INSTALLATION_ID = args.getString(2); //TODO save question as BRAND_ID
             // APP_ID = args.getString(3);//TODO save question as BRAND_ID
             // ISSUER = args.getString(4);//TODO save question as BRAND_ID
-            try {
+//             try {
                 // JSONObject customEntryPoints = new JSONObject();
                 // customEntryPoints.put("entryPoint", args.getString(5));
                 // Log.d("Recieved Custom", customEntryPoints.toString());
@@ -69,9 +69,9 @@ public class livepersonswift extends CordovaPlugin {
                 
                 this.ConnectToBot(firstName, callbackContext);
 
-            } catch (JSONException e) {
-                Log.d("Recieved Custom", e.toString());
-            }
+//             } catch (JSONException e) {
+//                 Log.d("Recieved Custom", e.toString());
+//             }
 
             return true;
         }
