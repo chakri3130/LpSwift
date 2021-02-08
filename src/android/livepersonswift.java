@@ -1,4 +1,5 @@
 package cordova.plugin.livepersonswift;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -13,13 +14,10 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import cordova.plugin.livepersonswift.LpMessagingWrapper;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -40,7 +38,7 @@ public class livepersonswift extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("add")) {
+        if (action.equals("instantiateLPMessagingSDK")) {
              firstName = args.getString(0);
             // BRAND_ID = args.getString(1); //TODO question: is it possible that we change the BRAND_ID? Can we hardcode it or no.
             // APP_INSTALLATION_ID = args.getString(2); //TODO save question as BRAND_ID
@@ -66,7 +64,7 @@ public class livepersonswift extends CordovaPlugin {
                 //         .put("dev")
                 //         .put("us")
                 //         .put("en");
-                
+
                 this.ConnectToBot(firstName, callbackContext);
 
 //             } catch (JSONException e) {
@@ -74,6 +72,14 @@ public class livepersonswift extends CordovaPlugin {
 //             }
 
             return true;
+        }
+        else{
+          entryPoints = new JSONArray();
+          entryPoints.put(args.get(0))
+            .put(args.get(1))
+            .put(args.get(2))
+            .put(args.get(3));
+          getEngagement(callbackContext);
         }
         return false;
     }
