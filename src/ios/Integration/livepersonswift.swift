@@ -3,7 +3,7 @@
 var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
     var LPwrapper:LPMessagingWrapper?
 //    var engagement:LPGetEngagementResponse?
-@objc(add:) func add(_ command: CDVInvokedUrlCommand) {
+@objc(instantiateLPMessagingSDK:) func instantiateLPMessagingSDK(_ command: CDVInvokedUrlCommand) {
 var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
     if (self.LPwrapper == nil) {
     LPwrapper = LPMessagingWrapper.init(user: nil, authenticationParams: nil)
