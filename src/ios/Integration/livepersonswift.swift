@@ -18,11 +18,11 @@ self.commandDelegate!.send(pluginResult, callbackId: command.callbackId)
 
     @objc(ConnectToBot:) func ConnectToBot(_ command: CDVInvokedUrlCommand) {
         
-//        let engagementCountry = command.arguments[0]  as! String ?? "iOS-default"
-//        var engagementStep = command.arguments[1] as! String ?? "dev"
-//        var engagmentLng = command.arguments[2] as! String ?? "us"
-//        var engagementEnv = command.arguments[3] as! String ?? "es"
-        let customEntryPoints = ["ios-tutorial-step1","dev","us","es"]
+       let engagementCountry = command.arguments[0]  as! String ?? "iOS-default"
+       var engagementStep = command.arguments[1] as! String ?? "dev"
+       var engagmentLng = command.arguments[2] as! String ?? "us"
+       var engagementEnv = command.arguments[3] as! String ?? "es"
+        let customEntryPoints = [engagementCountry, engagementStep, engagmentLng, engagementEnv]
         self.LPwrapper?.getEngagement(entryPoints: customEntryPoints) { (result) in
             if(result == true)
             {
