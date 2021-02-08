@@ -113,7 +113,7 @@ public class livepersonswift extends CordovaPlugin {
                 callbackContext.success("pre_engagement");
                 Log.d(TAG, "pre_engagement");
 //                getEngagement(callbackContext); //TODO remove this line if want to call it from Ionic.
-                showConversationWithoutEngagement(firstName, callbackContext);
+//                 showConversationWithoutEngagement(firstName, callbackContext);
             }
 
             @Override
