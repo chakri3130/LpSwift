@@ -1,48 +1,64 @@
-@objc(livepersonswift) class livepersonswift : CDVPlugin{
-    typealias LPSDKCompletion = (Bool) -> Void
-var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
-    var LPwrapper:LPMessagingWrapper?
-//    var engagement:LPGetEngagementResponse?
-@objc(instantiateLPMessagingSDK:) func instantiateLPMessagingSDK(_ command: CDVInvokedUrlCommand) {
-var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
-    if (self.LPwrapper == nil) {
-    LPwrapper = LPMessagingWrapper.init(user: nil, authenticationParams: nil)
-    pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Messaging wrapper has been initialized successfully")
-    }
-    else
-    {
-        ConnectToBot(command)
-    }
-self.commandDelegate!.send(pluginResult, callbackId: command.callbackId)
-}
+import LPMessagingSDK
+import UIKit
 
-    @objc(ConnectToBot:) func ConnectToBot(_ command: CDVInvokedUrlCommand) {
-        
-       let engagementCountry = command.arguments[0]  as! String ?? "iOS-default"
-       var engagementStep = command.arguments[1] as! String ?? "dev"
-       var engagmentLng = command.arguments[2] as! String ?? "us"
-       var engagementEnv = command.arguments[3] as! String ?? "es"
-        let customEntryPoints = [engagementCountry, engagementStep, engagmentLng, engagementEnv]
-        self.LPwrapper?.getEngagement(entryPoints: customEntryPoints) { (result) in
-            if(result == true)
-            {
-            self.LPwrapper?.showChat(completion: { (success) in
-                print("success")
-            })
-            }
+typealias LPSDKCompletion = (Bool) -> Void
+
+@objc(livepersonswift) class livepersonswift: CDVPlugin {
+    var lpNavigationController: UINavigationController?
+    var lpMessagingWrapper: LPMessagingWrapper?
+
+    @objc func instantiateLPMessagingSDK(_ command: CDVInvokedUrlCommand?) {
+        if #available(iOS 13.0, *) {
+            lpNavigationController?.overrideUserInterfaceStyle = .light
         }
         
-
-        
+        if lpMessagingWrapper == nil {
+            self.lpMessagingWrapper = LPMessagingWrapper(
+                user: nil,
+                authenticationParams: nil)
+            let pluginResult = CDVPluginResult(
+                status: CDVCommandStatus.ok,
+                messageAs: "LP_MESSAgging_SDk_has_been_Initialized"
+            )
+            self.commandDelegate.send(pluginResult, callbackId: command?.callbackId)
+        }
     }
     
-
-//    @objc public func getEngagement(entryPoints: [String],
-//                                    completion: ((Bool) -> Void)?) {
-//
-//
-//    }
+    @objc func ConnectToBot(_ command: CDVInvokedUrlCommand?) {
+        let entryPoints = [
+            command?.arguments[0],
+            command?.arguments[1],
+            command?.arguments[2],
+            command?.arguments[3]
+        ]
+        if let entryPoints = entryPoints as? [String] {
+            self.getEngagementWithCompletionAction(entryPoints: entryPoints) { (completion) in
+                let pluginResult = CDVPluginResult(status: .ok, messageAs: "Engegment Success")
+                self.commandDelegate.send(pluginResult, callbackId: command?.callbackId)
+            }
+        }
+    }
     
+    @objc func showChat(_ command: CDVInvokedUrlCommand) {
+        self.showChatWithCompletionAction { (success) in
+            let pluginResult = CDVPluginResult(status: .ok, messageAs: "Conversation Opened")
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
+    }
     
+    func getEngagementWithCompletionAction(entryPoints: [String], completionAction: @escaping LPSDKCompletion) {
+        self.lpMessagingWrapper?.getEngagement(entryPoints: entryPoints, completion: completionAction)
+    }
     
+    func showChatWithCompletionAction(_ completion: @escaping LPSDKCompletion) {
+        self.lpMessagingWrapper?.showChat(completion: completion)
+    }
+    
+    func logOutWithCompletionAction(_ completion: @escaping LPSDKCompletion) {
+        self.lpMessagingWrapper?.logOut(completion: completion)
+    }
+    
+    func clearHistoryWithCompletionAction(_ completion: @escaping LPSDKCompletion) {
+        self.lpMessagingWrapper?.clearHistory(completion: completion)
+    }
 }

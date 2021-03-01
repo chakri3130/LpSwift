@@ -33,6 +33,8 @@ public class livepersonswift extends CordovaPlugin {
     private String APP_ID = "com.quantummaterialscorp.healthid"; //It's the applicationId, which will be used for FCM.
     private String ISSUER = "QMC_Android";
     private String firstName;
+    private String LPResponse;
+    LPEngagementResponse maintainResponse;
 
     private JSONArray entryPoints;
 
@@ -73,15 +75,22 @@ public class livepersonswift extends CordovaPlugin {
 
             return true;
         }
-        else{
+        else if(action.equals("ConnectToBot")){
           entryPoints = new JSONArray();
           entryPoints.put(args.get(0))
             .put(args.get(1))
             .put(args.get(2))
             .put(args.get(3));
           getEngagement(callbackContext);
+          return true;
         }
-        return false;
+        else
+        {
+            
+            showConversation(firstName,maintainResponse,callbackContext);
+            return true;
+        }
+        
     }
 
     private void coolMethod(String message, CallbackContext callbackContext) {
@@ -130,8 +139,9 @@ public class livepersonswift extends CordovaPlugin {
         LpMessagingWrapper.getEngagement(context, entryPoints, new LpMessagingWrapper.GetEngagementListener() {
             @Override
             public void onSuccess(LPEngagementResponse response) {
-                callbackContext.success();
-                showConversation(firstName, response, callbackContext); //TODO remove this line if want to call it from Ionic.
+                callbackContext.success("post Engagement");
+                maintainResponse = response;
+               // showConversation(firstName, response, callbackContext); //TODO remove this line if want to call it from Ionic.
             }
 
             @Override
