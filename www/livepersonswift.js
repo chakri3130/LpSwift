@@ -13,7 +13,7 @@ exports.ConnectToBot = function (entryPoint_Environment,entryPoint_language,entr
     };
 
     exports.showChat = function(deviceToken,success, error){
-        exec(success,error,'LivePersonPlugin', 'showChat', [deviceToken] )
+        exec(success,error,'livepersonswift', 'showChat', [deviceToken] )
     }
 
     
