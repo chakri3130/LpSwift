@@ -1,21 +1,21 @@
 {
-    "ios-default":"Hola, soy BELLA, tu asistente de salud automatizado. Lo guiaré a través de su prueba de COVID-19 en casa.",
-    "ios-tutorial-step1":"¿Tiene alguna pregunta sobre cómo preparar su área?",
-    "ios-tutorial-step2":"¿Tiene alguna pregunta sobre la configuración de la prueba?",
-    "ios-tutorial-step3":"¿Necesita ayuda con su hisopo?",
-    "ios-tutorial-step4":"¿Tiene alguna pregunta sobre cómo procesar su prueba?",
-    "ios-tutorial-step5":"¿Tiene alguna pregunta sobre el resultado de su prueba?",
-    "ios-tutorial-step6":"¿Quiere saber más sobre cómo informar los resultados de sus pruebas?",
-    "ios-tutorial-step7":"¿Qué preguntas tiene sobre el almacenamiento de su kit de prueba?",
+    "iOS-default":"Hola, soy BELLA, tu asistente de salud automatizado. Lo guiaré a través de su prueba de COVID-19 en casa.",
+    "iOS-tutorial-step1":"¿Tiene alguna pregunta sobre cómo preparar su área?",
+    "iOS-tutorial-step2":"¿Tiene alguna pregunta sobre la configuración de la prueba?",
+    "iOS-tutorial-step3":"¿Necesita ayuda con su hisopo?",
+    "iOS-tutorial-step4":"¿Tiene alguna pregunta sobre cómo procesar su prueba?",
+    "iOS-tutorial-step5":"¿Tiene alguna pregunta sobre el resultado de su prueba?",
+    "iOS-tutorial-step6":"¿Quiere saber más sobre cómo informar los resultados de sus pruebas?",
+    "iOS-tutorial-step7":"¿Qué preguntas tiene sobre el almacenamiento de su kit de prueba?",
     "Quick_replies": {
-        "ios-default":["Comienzo"],
-        "ios-tutorial-step1":["Consejos al preparar el área", "No me lavé ni desinfeccioné", "Artículos faltantes / dañados", "¿Por qué debo sonarme la nariz?"],
-        "ios-tutorial-step2":["Consejos de configuración de prueba", "Derramé líquido", "¿Qué hay en el líquido? "," Toqué el tubo de ensayo "],
-        "ios-tutorial-step3":["Cómo hacer un hisopo correctamente", "Mi nariz está congestionada", "Solo me limpié 1 fosa nasal", "No puedo terminar de limpiar", "Algo tocó mi hisopo"],
-        "ios-tutorial-step4":["Dejé caer en el lugar equivocado", "No hay suficiente líquido", "Estornudé en la prueba", "Dejé caer demasiadas gotas", "La prueba se tocó / movió", "Consejos para procesar la prueba", "Abrí la prueba 30 + min hace "],
-        "ios-tutorial-step5":["Veo 2 líneas", "Veo una línea T tenue", "¿Necesito una prueba de PCR?", "¿Qué significan mis resultados?", "¡Ayuda! He dado positivo"],
-        "ios-tutorial-step6":["¿Necesito volver a realizar la prueba?", "¿Quién puede ver mis resultados?", "¿Cómo informo los resultados?"],
-        "ios-tutorial-step7":["Temperatura y clima", "Necesito hacer un nuevo pedido", "¿La prueba caduca?"]
+        "iOS-default":["Comienzo"],
+        "iOS-tutorial-step1":["Consejos al preparar el área", "No me lavé ni desinfeccioné", "Artículos faltantes / dañados", "¿Por qué debo sonarme la nariz?"],
+        "iOS-tutorial-step2":["Consejos de configuración de prueba", "Derramé líquido", "¿Qué hay en el líquido? "," Toqué el tubo de ensayo "],
+        "iOS-tutorial-step3":["Cómo hacer un hisopo correctamente", "Mi nariz está congestionada", "Solo me limpié 1 fosa nasal", "No puedo terminar de limpiar", "Algo tocó mi hisopo"],
+        "iOS-tutorial-step4":["Dejé caer en el lugar equivocado", "No hay suficiente líquido", "Estornudé en la prueba", "Dejé caer demasiadas gotas", "La prueba se tocó / movió", "Consejos para procesar la prueba", "Abrí la prueba 30 + min hace "],
+        "iOS-tutorial-step5":["Veo 2 líneas", "Veo una línea T tenue", "¿Necesito una prueba de PCR?", "¿Qué significan mis resultados?", "¡Ayuda! He dado positivo"],
+        "iOS-tutorial-step6":["¿Necesito volver a realizar la prueba?", "¿Quién puede ver mis resultados?", "¿Cómo informo los resultados?"],
+        "iOS-tutorial-step7":["Temperatura y clima", "Necesito hacer un nuevo pedido", "¿La prueba caduca?"]
     }
     
     }
