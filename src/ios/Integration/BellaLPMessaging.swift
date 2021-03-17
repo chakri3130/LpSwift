@@ -1,9 +1,14 @@
 import Foundation
 import LPMessagingSDK
-
 protocol BellaLPSDKDelegate: class {
     func chatDismissed()
 }
+
+var receivedLangugage:String = ""
+var iosDefault: String = ""
+var receivedEntryPoint:String = ""
+var iOSDefaultQuickreply:[String] = [""]
+var iOSDefault_Quick_reply:[String: Any] = ["": ""]
 
 enum LPEntryPoint {
     case iOSDefault
@@ -39,47 +44,127 @@ enum LPEntryPoint {
         }
     }
     
+    
+
     var welcomeMessage: String {
-        switch self {
-        case .iOSDefault,
-             .faq:
-            return "Hi, I'm BELLA, your automated health assistant. I'll be guiding you through your at-home COVID-19 test."
-        case .testingStep1:
-            return "Have a question about preparing your area?"
-        case .testingStep2:
-            return "Have a question about test setup?"
-        case .testingStep3:
-            return "Need some help with your swab?"
-        case .testingStep4:
-            return "Have a question about processing your test?"
-        case .testingStep5:
-            return "Have a question about your test result?"
-        case .testingStep6:
-            return "Want to understand more about reporting your test results?"
-        case .testingStep7:
-            return "What questions do you have about storing your test kit?"
+        
+        if let receivedLangugage1:String = UserDefaults.standard.string(forKey: "langugage") { print(receivedLangugage)
+            receivedLangugage = receivedLangugage1
         }
+        if let receivedEntryPoint1:String = UserDefaults.standard.string(forKey: "entryPoint") { print(receivedEntryPoint)
+            receivedEntryPoint = receivedEntryPoint1
+        }
+       
+    
+        if let path = Bundle.main.path(forResource:receivedLangugage , ofType: "json") {
+
+                    do {
+                          let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+
+                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as! NSDictionary
+
+                        print(jsonResult)
+
+                        iosDefault = jsonResult[receivedEntryPoint] as! String
+
+                        print(iosDefault)
+                      } catch {
+
+                      }
+
+                }
+        
+            switch self {
+            case .iOSDefault,
+                 .faq:
+                return iosDefault
+            case .testingStep1:
+                return iosDefault
+            case .testingStep2:
+                return iosDefault
+            case .testingStep3:
+                return iosDefault
+            case .testingStep4:
+                return iosDefault
+            case .testingStep5:
+                return iosDefault
+            case .testingStep6:
+                return iosDefault
+            case .testingStep7:
+                return iosDefault
+            }
+        
+        
+        
     }
     
     var quickReplies: [String] {
+        if let receivedLangugage1:String = UserDefaults.standard.string(forKey: "langugage") { print(receivedLangugage)
+            receivedLangugage = receivedLangugage1
+        }
+        if let receivedEntryPoint1:String = UserDefaults.standard.string(forKey: "entryPoint") { print(receivedEntryPoint)
+            receivedEntryPoint = receivedEntryPoint1
+        }
+       
+    
+        if let path = Bundle.main.path(forResource:receivedLangugage , ofType: "json") {
+
+                    do {
+                          let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+
+                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as! NSDictionary
+
+                        print(jsonResult)
+
+                        iOSDefault_Quick_reply = jsonResult["Quick_replies"] as? NSDictionary as! [String : Any]
+                        iOSDefaultQuickreply = iOSDefault_Quick_reply[receivedEntryPoint] as! [String]
+
+                        print(iosDefault)
+                      } catch {
+
+                      }
+
+                }
+        
+            
+        
+//        switch self {
+//        case .iOSDefault,
+//             .faq:
+//            return ["Start"]
+//        case .testingStep1:
+//            return ["Tips when prepping area", "I didn't wash or sanitize", "Missing / damaged items", "Why must I blow my nose?"]
+//        case .testingStep2:
+//            return ["Test setup tips", "I spilled liquid", "What's in the liquid?", "I touched the test tube"]
+//        case .testingStep3:
+//            return ["How to swab correctly", "My nose is congested", "I only swabbed 1 nostril", "I can't finish swabbing", "Something touched my swab"]
+//        case .testingStep4:
+//            return ["I dropped in wrong place", "There's not enough liquid", "I sneezed on the test", "I dropped too many drops", "Test was touched/moved", "Test processing tips", "I opened test 30+ min ago"]
+//        case .testingStep5:
+//            return ["I see 2 lines", "I see a faint T line", "Do I need a PCR test?", "What do my results mean?", "Help! I tested positive"]
+//        case .testingStep6:
+//            return ["Do I need to retest?", "Who can see my results?", "How do I report results?"]
+//        case .testingStep7:
+//            return ["Temperature & weather", "I need to reorder", "Does the test expire?"]
+//        }
         switch self {
         case .iOSDefault,
              .faq:
-            return ["Start"]
+            return iOSDefaultQuickreply
         case .testingStep1:
-            return ["Tips when prepping area", "I didn't wash or sanitize", "Missing / damaged items", "Why must I blow my nose?"]
+            return iOSDefaultQuickreply
         case .testingStep2:
-            return ["Test setup tips", "I spilled liquid", "What's in the liquid?", "I touched the test tube"]
+            return iOSDefaultQuickreply
         case .testingStep3:
-            return ["How to swab correctly", "My nose is congested", "I only swabbed 1 nostril", "I can't finish swabbing", "Something touched my swab"]
+            return iOSDefaultQuickreply
         case .testingStep4:
-            return ["I dropped in wrong place", "There's not enough liquid", "I sneezed on the test", "I dropped too many drops", "Test was touched/moved", "Test processing tips", "I opened test 30+ min ago"]
+            return iOSDefaultQuickreply
         case .testingStep5:
-            return ["I see 2 lines", "I see a faint T line", "Do I need a PCR test?", "What do my results mean?", "Help! I tested positive"]
+            return iOSDefaultQuickreply
         case .testingStep6:
-            return ["Do I need to retest?", "Who can see my results?", "How do I report results?"]
+            return iOSDefaultQuickreply
         case .testingStep7:
-            return ["Temperature & weather", "I need to reorder", "Does the test expire?"]
+            return iOSDefaultQuickreply
         }
     }
 }
