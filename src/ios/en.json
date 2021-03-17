@@ -1,21 +1,21 @@
 {
-    "ios-default":"Hi, I'm BELLA, your automated health assistant. I'll be guiding you through your at-home COVID-19 test.",
-    "ios-tutorial-step1":"Have a question about preparing your area?",
-    "ios-tutorial-step2":"Have a question about test setup?",
-    "ios-tutorial-step3":"Need some help with your swab?",
-    "ios-tutorial-step4":"Have a question about processing your test?",
-    "ios-tutorial-step5":"Have a question about your test result?",
-    "ios-tutorial-step6":"Want to understand more about reporting your test results?",
-    "ios-tutorial-step7":"What questions do you have about storing your test kit?",
+    "iOS-default":"Hi, I'm BELLA, your automated health assistant. I'll be guiding you through your at-home COVID-19 test.",
+    "iOS-tutorial-step1":"Have a question about preparing your area?",
+    "iOS-tutorial-step2":"Have a question about test setup?",
+    "iOS-tutorial-step3":"Need some help with your swab?",
+    "iOS-tutorial-step4":"Have a question about processing your test?",
+    "iOS-tutorial-step5":"Have a question about your test result?",
+    "iOS-tutorial-step6":"Want to understand more about reporting your test results?",
+    "iOS-tutorial-step7":"What questions do you have about storing your test kit?",
     "Quick_replies": {
-        "ios-default":["Start"],
-        "ios-tutorial-step1":["Tips when prepping area", "I didn't wash or sanitize", "Missing / damaged items", "Why must I blow my nose?"],
-        "ios-tutorial-step2":["Test setup tips", "I spilled liquid", "What's in the liquid?", "I touched the test tube"],
-        "ios-tutorial-step3":["How to swab correctly", "My nose is congested", "I only swabbed 1 nostril", "I can't finish swabbing", "Something touched my swab"],
-        "ios-tutorial-step4":["I dropped in wrong place", "There's not enough liquid", "I sneezed on the test", "I dropped too many drops", "Test was touched/moved", "Test processing tips", "I opened test 30+ min ago"],
-        "ios-tutorial-step5":["I see 2 lines", "I see a faint T line", "Do I need a PCR test?", "What do my results mean?", "Help! I tested positive"],
-        "ios-tutorial-step6":["Do I need to retest?", "Who can see my results?", "How do I report results?"],
-        "ios-tutorial-step7":["Temperature & weather", "I need to reorder", "Does the test expire?"]
+        "iOS-default":["Start"],
+        "iOS-tutorial-step1":["Tips when prepping area", "I didn't wash or sanitize", "Missing / damaged items", "Why must I blow my nose?"],
+        "iOS-tutorial-step2":["Test setup tips", "I spilled liquid", "What's in the liquid?", "I touched the test tube"],
+        "iOS-tutorial-step3":["How to swab correctly", "My nose is congested", "I only swabbed 1 nostril", "I can't finish swabbing", "Something touched my swab"],
+        "iOS-tutorial-step4":["I dropped in wrong place", "There's not enough liquid", "I sneezed on the test", "I dropped too many drops", "Test was touched/moved", "Test processing tips", "I opened test 30+ min ago"],
+        "iOS-tutorial-step5":["I see 2 lines", "I see a faint T line", "Do I need a PCR test?", "What do my results mean?", "Help! I tested positive"],
+        "iOS-tutorial-step6":["Do I need to retest?", "Who can see my results?", "How do I report results?"],
+        "iOS-tutorial-step7":["Temperature & weather", "I need to reorder", "Does the test expire?"]
     }
     
     }
