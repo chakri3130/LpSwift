@@ -45,6 +45,8 @@
         <resource-file src="src/ios/ImageAssets/aIc24Gallery.imageset/aIc24Gallery.pdf" />
         <resource-file src="src/ios/ImageAssets/chatAvatar.png" />
         <resource-file src="src/ios/ImageAssets/lpClose.png" />
+        <resource-file src="src/ios/en.json" />
+        <resource-file src="src/ios/es.json" />
         <framework custom="true" embed="true" src="src/ios/LPMessagingSDK/LPMessagingSDK.xcframework" />
         
     </platform>
