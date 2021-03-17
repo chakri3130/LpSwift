@@ -6,7 +6,6 @@ typealias LPSDKCompletion = (Bool) -> Void
 @objc(livepersonswift) class livepersonswift: CDVPlugin {
     var lpNavigationController: UINavigationController?
     var lpMessagingWrapper: LPMessagingWrapper?
-
     @objc func instantiateLPMessagingSDK(_ command: CDVInvokedUrlCommand?) {
         if #available(iOS 13.0, *) {
             lpNavigationController?.overrideUserInterfaceStyle = .light
@@ -16,6 +15,8 @@ typealias LPSDKCompletion = (Bool) -> Void
             self.lpMessagingWrapper = LPMessagingWrapper(
                 user: nil,
                 authenticationParams: nil)
+            let token = command?.arguments[0]
+
             let pluginResult = CDVPluginResult(
                 status: CDVCommandStatus.ok,
                 messageAs: "LP_MESSAgging_SDk_has_been_Initialized"
@@ -31,6 +32,9 @@ typealias LPSDKCompletion = (Bool) -> Void
             command?.arguments[2],
             command?.arguments[3]
         ]
+        let SelectedLangugage = UserDefaults.standard.set(command?.argument(at: 2), forKey: "langugage")
+        let key_entrypoint = UserDefaults.standard.set(command?.argument(at: 1), forKey: "entryPoint")
+        
         if let entryPoints = entryPoints as? [String] {
             self.getEngagementWithCompletionAction(entryPoints: entryPoints) { (completion) in
                 let pluginResult = CDVPluginResult(status: .ok, messageAs: "Engegment Success")
