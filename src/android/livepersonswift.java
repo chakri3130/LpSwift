@@ -34,6 +34,7 @@ public class livepersonswift extends CordovaPlugin {
     private String ISSUER = "QMC_Android";
     private String firstName;
     private String LPResponse;
+    private String selectedLanguage;
     LPEngagementResponse maintainResponse;
 
     private JSONArray entryPoints;
@@ -77,6 +78,8 @@ public class livepersonswift extends CordovaPlugin {
         }
         else if(action.equals("ConnectToBot")){
           entryPoints = new JSONArray();
+            selectedLanguage = args.getString(2);
+            Log.d("received Language", selectedLanguage);
           entryPoints.put(args.get(0))
             .put(args.get(1))
             .put(args.get(2))
@@ -154,9 +157,17 @@ public class livepersonswift extends CordovaPlugin {
 
     public void showConversation(String firstName, LPEngagementResponse response, CallbackContext callbackContext) {
         //TODO Needs to set welcome message and optionItems from Ionic.
-        String welcomeMessage = "Hi, I'm BELLA, your automated health assistant. I'll be guiding you through your at-home COVID-19 test.";
-        List<MessageOption> optionItems = Collections.singletonList(new MessageOption("Start", "Start"));
-
+        String welcomeMessage_based_on_language = null;
+        String display_text_value = null;
+        if (selectedLanguage.equals("en")) {
+            welcomeMessage_based_on_language = "Hi, I'm BELLA, your automated health assistant. I'll be guiding you through your at-home COVID-19 test.";
+            display_text_value= "Start";
+        } else {
+            welcomeMessage_based_on_language = "Hola, soy BELLA, tu asistente de salud automatizado. Lo guiaré a través de su prueba de COVID-19 en casa.";
+            display_text_value= "Comienzo";
+        }
+        String welcomeMessage = welcomeMessage_based_on_language;
+        List<MessageOption> optionItems = Collections.singletonList(new MessageOption(display_text_value, display_text_value));
         LpMessagingWrapper.showConversation(cordova.getActivity(), firstName, welcomeMessage, optionItems, response, new LpMessagingWrapper.Listener() {
             @Override
             public void onSuccess() {
